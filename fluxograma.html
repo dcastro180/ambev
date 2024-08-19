@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxograma do Projeto PHP</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+
+<h2>Fluxograma do Projeto PHP</h2>
+
+<div class="mermaid">
+    graph TD;
+        A[Login] -->|Administrador| B[Admin: Cadastrar usuários, motoristas, upload CSV];
+        A -->|Usuário| C[Usuário: Upload CSV, visualizar tabela completa];
+        A -->|Motorista| D[Motorista: Visualizar dados filtrados];
+        
+        B --> E[Processamento de CSV];
+        C --> E[Processamento de CSV];
+        
+        E --> F[Tabela Completa no Banco];
+        
+        F --> G[Administrador: Visualizar tabela completa];
+        F --> H[Usuário: Visualizar tabela completa];
+        F --> I[Motorista: Visualizar dados filtrados];
+
+        subgraph Melhorias Futuras
+            J[Autenticação em Dois Fatores];
+            K[Validação avançada de CSV];
+            L[Processamento de dados em background];
+            M[Dashboard de Relatórios];
+            N[Histórico de Motoristas e Auditoria];
+        end;
+
+        B --> J;
+        E --> K;
+        E --> L;
+        F --> M;
+        I --> N;
+</div>
+
+</body>
+</html>
