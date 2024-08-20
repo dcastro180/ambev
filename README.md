@@ -43,11 +43,3 @@ Siga os passos abaixo para configurar o projeto em sua máquina local.
 - XAMPP (ou equivalente)
 
 
-### Como Personalizar:
-
-1. **Títulos e Descrição:** Personalize a descrição do projeto com detalhes específicos.
-2. **Links de Contato:** Substitua os placeholders de LinkedIn e GitHub pelo seu LinkedIn real ou outros links de contato.
-3. **Melhorias Futuras:** Adicione ou remova melhorias conforme o projeto evoluir.
-4. **Instruções de Instalação:** Se o seu projeto tiver requisitos diferentes ou instruções mais específicas, ajuste essa parte.
-
-
