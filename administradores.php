@@ -20,55 +20,6 @@ include('config.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="style.css">
-    
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-        }
-        .buttons {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
-            background-color: #007bff;
-            color: #fff;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: left;
-        }
-        th {
-            background-color: #007bff;
-            color: #fff;
-        }
-    </style>
     <script>
         function showSection(section) {
             document.getElementById('usersSection').style.display = section === 'users' ? 'block' : 'none';
@@ -78,27 +29,27 @@ include('config.php');
 </head>
 <body>
     <nav class="navbar navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand">Sistema Bruno Ambev</a>
-                <?php
-                    print "Olá, " .$_SESSION["nome"];
-                    print "<a href='dashboard.php' class= 'btn btn-secondary'>Home</a>";
-                    print "<a href='logout.php' class= 'btn btn-danger'>Sair</a>";
-
-                ?>
-            </div>
+        <div class="container-fluid">
+            <a class="navbar-brand">Sistema Bruno Ambev</a>
+            <?php
+                print "Olá, " . $_SESSION["nome"];
+                print "<a href='dashboard.php' class='btn btn-secondary'>Home</a>";
+                print "<a href='logout.php' class='btn btn-danger'>Sair</a>";
+            ?>
+        </div>
     </nav>
     <div class="container">
         <h1>Painel do Administrador</h1>
         <div class="buttons">
-            <button onclick="showSection('users')">Mostrar Usuários</button>
-            <button onclick="showSection('drivers')">Mostrar Motoristas</button>
+            <button class="btn btn-primary" onclick="showSection('users')">Mostrar Usuários</button>
+            <button class="btn btn-primary" onclick="showSection('drivers')">Mostrar Motoristas</button>
         </div>
+
 
         <!-- Seção de Usuários -->
         <div id="usersSection" style="display: none;">
             <h2>Usuários Cadastrados</h2>
-            <button onclick="location.href='cadastro_usuario.php'">Cadastrar Novo Usuário</button>
+            <button class="btn btn-primary" onclick="location.href='cadastro_usuario.php'">Cadastrar Novo Usuário</button>
             <table>
                 <thead>
                     <tr>
@@ -136,7 +87,7 @@ include('config.php');
         <!-- Seção de Motoristas -->
         <div id="driversSection" style="display: none;">
             <h2>Motoristas Cadastrados</h2>
-            <button onclick="location.href='cadastro_motorista.php'">Cadastrar Novo Motorista</button>
+            <button class="btn btn-primary" onclick="location.href='cadastro_motorista.php'">Cadastrar Novo Motorista</button>
             <table>
                 <thead>
                     <tr>
