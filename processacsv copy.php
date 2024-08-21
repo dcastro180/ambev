@@ -1,4 +1,5 @@
 <?php
+
 include_once "config.php";
 
 $arquivo = $_FILES['arquivo'];
@@ -11,38 +12,28 @@ if ($arquivo['type'] == 'text/csv') {
     $dados_arquivo = fopen($arquivo['tmp_name'], "r");
 
     if ($dados_arquivo !== FALSE) {
-        // Captura o cabeçalho e cria um mapa de índices
-        $cabecalho = fgetcsv($dados_arquivo, 2000, ";");
-        $indices = array_flip($cabecalho);
-
-        // Verifica se os índices necessários existem
-        $campos_necessarios = ['Data', 'Mapa', 'CxEntreg', 'TempoInterno', 'HrJornadaLiq', 'QtEntregasEntreg(RV)', 'CPFMotorista', 'CPFAjudante1', 'CPFAjudante2'];
-        foreach ($campos_necessarios as $campo) {
-            if (!isset($indices[$campo])) {
-                die("O campo '$campo' não foi encontrado no arquivo CSV.");
-            }
-        }
+        // Captura o cabeçalho e ignora a primeira linha
+        $cabecalho = fgetcsv($dados_arquivo, 1000, ";");
 
         // Percorre cada linha do arquivo CSV
-        while ($linha = fgetcsv($dados_arquivo, 2000, ";")) {
+        while ($linha = fgetcsv($dados_arquivo, 1000, ";")) {
             if ($primeira_linha) {
                 $primeira_linha = false;
                 continue;
             }
-
             // Converte a linha para UTF-8
             array_walk_recursive($linha, 'converter');
 
-            // Atribui os valores a variáveis individuais usando os índices
-            $data1 = !empty($linha[$indices['Data']]) ? $linha[$indices['Data']] : NULL;
-            $mapa = !empty($linha[$indices['Mapa']]) ? $linha[$indices['Mapa']] : NULL;
-            $cxentreg = !empty($linha[$indices['CxEntreg']]) ? $linha[$indices['CxEntreg']] : NULL;
-            $tempointerno = !empty($linha[$indices['TempoInterno']]) ? $linha[$indices['TempoInterno']] : NULL;
-            $hrjornadaliq = !empty($linha[$indices['HrJornadaLiq']]) ? $linha[$indices['HrJornadaLiq']] : NULL;
-            $qtentregasentreg_rv = !empty($linha[$indices['QtEntregasEntreg(RV)']]) ? $linha[$indices['QtEntregasEntreg(RV)']] : NULL;
-            $cpfmotorista = !empty($linha[$indices['CPFMotorista']]) ? $linha[$indices['CPFMotorista']] : NULL;
-            $cpfajudante1 = !empty($linha[$indices['CPFAjudante1']]) ? $linha[$indices['CPFAjudante1']] : NULL;
-            $cpfajudante2 = !empty($linha[$indices['CPFAjudante2']]) ? $linha[$indices['CPFAjudante2']] : NULL;
+            // Atribui os valores a variáveis individuais
+            $data1 = !empty($linha[0]) ? $linha[0] : NULL;
+            $mapa = !empty($linha[13]) ? $linha[13] : NULL;
+            $cxentreg = !empty($linha[16]) ? $linha[16] : NULL;
+            $tempointerno = !empty($linha[47]) ? $linha[47] : NULL;
+            $hrjornadaliq = !empty($linha[67]) ? $linha[67] : NULL;
+            $qtentregasentreg_rv = !empty($linha[103]) ? $linha[103] : NULL;
+            $cpfmotorista = !empty($linha[106]) ? $linha[106] : NULL;
+            $cpfajudante1 = !empty($linha[107]) ? $linha[107] : NULL;
+            $cpfajudante2 = !empty($linha[108]) ? $linha[108] : NULL;
 
             // Prepara a query com placeholders `?`
             $query_motorista = "INSERT INTO dados_motorista (data1, mapa, cxentreg, tempointerno, hrjornadaliq, qtentregasentreg_rv, cpfmotorista, cpfajudante1, cpfajudante2)

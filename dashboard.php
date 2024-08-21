@@ -37,8 +37,8 @@
     <div class="card">
         <div class="card-body">
         <?php if ($result->num_rows > 0): ?>
-        <table class="table table-striped table-hover">
-            <thead>
+        <table class="table table-striped">
+            <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Data</th>
