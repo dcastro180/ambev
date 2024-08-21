@@ -1,7 +1,7 @@
 /* Estilo Global */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Cor de fundo suave */
+    background-color: #e8f5e9; /* Cor de fundo suave (verde claro) */
     margin: 0;
     padding: 20px;
 }
@@ -20,7 +20,7 @@ body {
 h1 {
     text-align: center;
     font-size: 28px;
-    color: #333; /* Cor do título */
+    color: #2e7d32; /* Cor do título (verde escuro) */
     margin-bottom: 20px;
 }
 
@@ -36,14 +36,14 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 4px;
-    background-color: #007bff; /* Cor do botão */
+    background-color: #66bb6a; /* Cor do botão (verde médio) */
     color: #fff; /* Cor do texto */
     font-size: 16px;
     transition: background-color 0.3s ease; /* Transição suave */
 }
 
 button:hover {
-    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+    background-color: #388e3c; /* Cor do botão ao passar o mouse (verde escuro) */
 }
 
 /* Tabela */
@@ -64,13 +64,13 @@ th, td {
 }
 
 th {
-    background-color: #007bff; /* Fundo do cabeçalho */
+    background-color: #43a047; /* Fundo do cabeçalho (verde médio) */
     color: #fff; /* Cor do texto do cabeçalho */
     font-weight: bold;
 }
 
 td {
-    background-color: #f9f9f9; /* Fundo das células */
+    background-color: #f1f8e9; /* Fundo das células (verde claro) */
 }
 
 /* Navbar */
@@ -83,18 +83,18 @@ td {
 
 .navbar-brand {
     font-size: 24px;
-    color: #007bff;
+    color: #388e3c; /* Cor da marca (verde escuro) */
 }
 
 .navbar a {
     margin-left: 15px;
-    color: #007bff;
+    color: #388e3c; /* Cor do link (verde escuro) */
     text-decoration: none;
     font-weight: bold;
 }
 
 .navbar a:hover {
-    color: #0056b3;
+    color: #2e7d32; /* Cor do link ao passar o mouse (verde mais escuro) */
 }
 
 /* Ajustes para Layout */
@@ -119,26 +119,26 @@ td {
 
 h2 {
     font-size: 24px;
-    color: #333; /* Cor do subtítulo */
+    color: #2e7d32; /* Cor do subtítulo (verde escuro) */
     margin-bottom: 15px;
 }
 
+/* Botões */
 .buttons {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Remover este estilo */
 button {
     padding: 10px 20px;
     margin: 5px;
     cursor: pointer;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #66bb6a; /* Cor do botão (verde médio) */
+    color: #fff; /* Cor do texto */
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #388e3c; /* Cor do botão ao passar o mouse (verde escuro) */
 }
