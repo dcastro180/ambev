@@ -1,34 +1,30 @@
-codigo login
+apaga o banco de dados 
 <?php
-    session_start();
+if (isset($_POST['delete_all'])) {
+    // Conecte-se ao banco de dados
+    $conn = new mysqli('localhost', 'username', 'password', 'nome_do_banco');
 
-    if (empty($_POST) or (empty($_POST["usuario"]) or (empty($_POST["senha"])))){
-        print "<script>location.href= 'index.php';</script>";
+    // Verifique a conexão
+    if ($conn->connect_error) {
+        die("Falha na conexão: " . $conn->connect_error);
     }
 
-    include('config.php');
+    // SQL para apagar todos os dados de todas as tabelas
+    $tables = ['tabela1', 'tabela2', 'tabela3']; // Liste todas as tabelas que você deseja esvaziar
 
-    $usuario = $_POST["usuario"];
-    $senha = $_POST["senha"];
-
-    $sql = "SELECT * FROM usuarios WHERE usuario = '{$usuario}' AND senha= '{$senha}'";
-
-    $res = $conn->query($sql) or die($conn->error); 
-
-    $row = $res->fetch_object();
-
-    $qtd = $res->num_rows;
-
-    if ($qtd > 0){
-        $_SESSION["usuario"] = $usuario;
-        $_SESSION["nome"] = $row->nome;
-        $_SESSION["tipo"] = $row->tipo;
-        print "<script>location.href= 'dashboard.php';</script>";
-    }else{
-        print "<script>alert('Usuario ou senha invalidos');</script>";
-        print "<script>location.href= 'index.php';</script>";
-        
+    foreach ($tables as $table) {
+        $sql = "DELETE FROM $table";
+        if ($conn->query($sql) !== TRUE) {
+            echo "Erro ao apagar dados da tabela $table: " . $conn->error;
+        }
     }
 
+    echo "Todos os dados foram apagados com sucesso!";
+    $conn->close();
+}
+?>
 
-(:data1, :mapa, :cxentreg, :tempointerno, :hrjornadaliq, :qtentregasentreg_rv, :cpfmotorista, :cpfajudante1, :cpfajudante2)
+botão 
+<form method="POST">
+    <button type="submit" name="delete_all" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja apagar todos os dados?');">Apagar Todos os Dados</button>
+</form>
