@@ -73,7 +73,7 @@ if (!isset($_SESSION["usuario"]) || $_SESSION["tipo"] != 1) {
                 <option value="caminhao">Caminhão</option>
             </select>
 
-            <label for="rotas">CPF do Motorista:</label>
+            <label for="cpfmotorista">CPF do Motorista:</label>
             <input type="text" id="cpfmotorista" name="cpfmotorista" required>
 
             <label for="observacao">Observação:</label>
@@ -81,6 +81,12 @@ if (!isset($_SESSION["usuario"]) || $_SESSION["tipo"] != 1) {
 
             <label for="tipo_usuario">Administrador:</label>
             <input type="checkbox" id="tipo_usuario" name="tipo_usuario" value="1">
+
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" required>
+
+            <label for="senha">Senha:</label>
+            <input type="text" id="senha" name="senha" required>
 
             <div class="buttons">
                 <button type="submit">Salvar</button>

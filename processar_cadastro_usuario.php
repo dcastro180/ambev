@@ -15,9 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $_POST['usuario'];
     $senha = $_POST['senha'];
     $tipo = $_POST['tipo'];
+    $usuario = $_POST['usuario'];
+    $senha = $_POST['senha'];
 
     // Usar prepared statements para prevenir SQL injection
-    $sql = $conn->prepare("INSERT INTO usuarios (nome, email, usuario, senha, tipo, date) VALUES (?, ?, ?, ?, ?, NOW())");
+    $sql = $conn->prepare("INSERT INTO usuarios (nome, email, usuario, senha, tipo, date, usuario, senha) VALUES (?, ?, ?, ?, ?, ?, ? NOW())");
     $sql->bind_param("sssss", $nome, $email, $usuario, $senha, $tipo);
 
     if ($sql->execute()) {

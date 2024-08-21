@@ -1,16 +1,37 @@
 <?php
-    session_start();
-    include_once ('config.php');
+session_start();
+include_once('config.php');
 
-    // Consulta SQL para selecionar todos os dados de "dados_motorista"
-    //$sql = "SELECT * FROM dados_motorista ORDER BY cpfmotorista";
-    
-    // Defina o CPF que você quer pesquisar
-    $cpfMotorista = '10405247966';  // Substitua este valor pelo CPF desejado
-   
+// Verificar se o token está presente no cookie
+if (!isset($_COOKIE['auth_token'])) {
+    echo "<script>alert('Acesso não autorizado.');</script>";
+    echo "<script>location.href='index.php';</script>";
+    exit();
+}
+
+$auth_token = $_COOKIE['auth_token'];
+
+// Verificar o token no banco de dados
+$sql = $conn->prepare("SELECT cpfmotorista FROM motoristas WHERE token = ?");
+$sql->bind_param("s", $auth_token);
+$sql->execute();
+$res = $sql->get_result();
+
+if ($res->num_rows > 0) {
+    $row = $res->fetch_assoc();
+    $_SESSION['cpfMotorista'] = $row['cpfmotorista'];
+
     // Consulta SQL para selecionar o motorista pelo CPF
-    $sql = "SELECT * FROM dados_motorista WHERE cpfmotorista = '$cpfMotorista'";
-    $result = $conn->query($sql);
+    $cpf = $_SESSION['cpfMotorista'];
+    $sql = $conn->prepare("SELECT * FROM dados_motorista WHERE cpfmotorista = ?");
+    $sql->bind_param("s", $cpf);
+    $sql->execute();
+    $result = $sql->get_result();
+} else {
+    echo "<script>alert('Token inválido.');</script>";
+    echo "<script>location.href='index.php';</script>";
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -21,14 +42,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="style.css">
-    
 </head>
 <body>
     <h1>Pagina com os dados para o motorista</h1>
 
     <!-- Verifica se há resultados -->
     <?php if ($result->num_rows > 0): ?>
-        <table border="1">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -41,7 +61,6 @@
                     <th>CPF Motorista</th>
                     <th>CPF Ajudante 1</th>
                     <th>CPF Ajudante 2</th>
-
                     <!-- Adicione outros cabeçalhos de acordo com as colunas da tabela -->
                 </tr>
             </thead>
@@ -49,16 +68,16 @@
                 <!-- Itera sobre os resultados e exibe os dados em linhas da tabela -->
                 <?php while($row = $result->fetch_assoc()): ?>
                     <tr>
-                        <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['data1']; ?></td>
-                        <td><?php echo $row['mapa']; ?></td>
-                        <td><?php echo $row['cxentreg']; ?></td>
-                        <td><?php echo $row['tempointerno']; ?></td>
-                        <td><?php echo $row['hrjornadaliq']; ?></td>
-                        <td><?php echo $row['qtentregasentreg_rv']; ?></td>
-                        <td><?php echo $row['cpfmotorista']; ?></td>
-                        <td><?php echo $row['cpfajudante1']; ?></td>
-                        <td><?php echo $row['cpfajudante2']; ?></td>
+                        <td><?php echo htmlspecialchars($row['id']); ?></td>
+                        <td><?php echo htmlspecialchars($row['data1']); ?></td>
+                        <td><?php echo htmlspecialchars($row['mapa']); ?></td>
+                        <td><?php echo htmlspecialchars($row['cxentreg']); ?></td>
+                        <td><?php echo htmlspecialchars($row['tempointerno']); ?></td>
+                        <td><?php echo htmlspecialchars($row['hrjornadaliq']); ?></td>
+                        <td><?php echo htmlspecialchars($row['qtentregasentreg_rv']); ?></td>
+                        <td><?php echo htmlspecialchars($row['cpfmotorista']); ?></td>
+                        <td><?php echo htmlspecialchars($row['cpfajudante1']); ?></td>
+                        <td><?php echo htmlspecialchars($row['cpfajudante2']); ?></td>
                         <!-- Adicione outras colunas conforme necessário -->
                     </tr>
                 <?php endwhile; ?>
@@ -67,6 +86,10 @@
     <?php else: ?>
         <p>Nenhum dado encontrado.</p>
     <?php endif; ?>
-    
+
 </body>
 </html>
+<?php
+$sql->close();
+$conn->close();
+?>
