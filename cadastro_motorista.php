@@ -86,7 +86,7 @@ if (!isset($_SESSION["usuario"]) || $_SESSION["tipo"] != 1) {
             <input type="text" id="usuario" name="usuario" required>
 
             <label for="senha">Senha:</label>
-            <input type="text" id="senha" name="senha" required>
+            <input type="password" id="senha" name="senha" required>
 
             <div class="buttons">
                 <button type="submit">Salvar</button>

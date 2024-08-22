@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $usuario = $_POST['usuario'];
-    $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+    $senha = $_POST['senha'];
     $tipo = intval($_POST['tipo']);
 
     // Verifica se os campos obrigatórios estão preenchidos
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verifica se a preparação da consulta foi bem-sucedida
     if ($sql) {
-        $sql->bind_param("sssii", $nome, $email, $usuario, $senha, $tipo);
+        $sql->bind_param("ssssi", $nome, $email, $usuario, $senha, $tipo);
         if ($sql->execute()) {
             echo "<script>alert('Usuário cadastrado com sucesso.');</script>";
             echo "<script>location.href='administradores.php';</script>";
