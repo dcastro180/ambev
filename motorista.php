@@ -45,6 +45,15 @@ if ($res->num_rows > 0) {
 </head>
 <body>
     <h1>Pagina com os dados para o motorista</h1>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand">Sistema Bruno Ambev</a><br>
+            <?php
+                print "Olá, " .$_SESSION["nome"];
+                print "<a href='logout.php' class= 'btn btn-danger'>Sair</a>";
+            ?>
+        </div>
+    </nav>
 
     <!-- Verifica se há resultados -->
     <?php if ($result->num_rows > 0): ?>

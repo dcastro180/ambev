@@ -26,9 +26,10 @@
         <div class="container-fluid">
             <a class="navbar-brand">Sistema Bruno Ambev</a>
             <?php
-                
-                print "<a href='dashboard.php' class='btn btn-secondary'>Home</a>";
-                print "<a href='importa.php' class='btn btn-secondary'>Upload Planilha</a>"; // Botão para pagina de upload.
+                print "Olá, " . $_SESSION["nome"];
+                print "<a href='administradores.php' class='btn btn-outline-success'>Home</a>";
+                print "<a href='dashboard.php' class='btn btn-outline-success'>Dashboard</a>";
+                print "<a href='importa.php' class='btn btn-outline-success'>Upload Planilha</a>"; // Botão para pagina de upload.
                 print "<a href='logout.php' class='btn btn-danger'>Sair</a>";
             ?>
         </div>

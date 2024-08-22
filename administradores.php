@@ -33,7 +33,8 @@ include('config.php');
             <a class="navbar-brand">Sistema Bruno Ambev</a>
             <?php
                 print "Olá, " . $_SESSION["nome"];
-                print "<a href='dashboard.php' class='btn btn-outline-success'>Home</a>";
+                print "<a href='administradores.php' class='btn btn-outline-success'>Home</a>";
+                print "<a href='dashboard.php' class='btn btn-outline-success'>Dashboard</a>";
                 print "<a href='importa.php' class='btn btn-outline-success'>Upload Planilha</a>"; // Botão para pagina de upload.
                 print "<a href='logout.php' class='btn btn-danger'>Sair</a>";
             ?>
@@ -75,6 +76,9 @@ include('config.php');
                                     <td>{$row['usuario']}</td>
                                     <td>" . ($row['tipo'] == 1 ? 'Admin' : 'Comum') . "</td>
                                     <td>{$row['date']}</td>
+                                    <td><a href='delete.php?type=user&id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Tem certeza que deseja excluir este usuário?\");'>Excluir</a>
+</td>
+
                                   </tr>";
                         }
                     } else {
@@ -99,6 +103,7 @@ include('config.php');
                         <th>CPF do Motorista</th>
                         <th>Observação</th>
                         <th>Tipo</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -115,6 +120,9 @@ include('config.php');
                                     <td>{$row['cpfmotorista']}</td>
                                     <td>{$row['observacao']}</td>
                                     <td>" . ($row['tipo_usuario'] == 1 ? 'Admin' : 'Comum') . "</td>
+                                    <td><a href='delete.php?type=user&id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Tem certeza que deseja excluir este usuário?\");'>Excluir</a>
+</td>
+
                                   </tr>";
                         }
                     } else {
