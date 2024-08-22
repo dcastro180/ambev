@@ -120,9 +120,7 @@ include('config.php');
                                     <td>{$row['cpfmotorista']}</td>
                                     <td>{$row['observacao']}</td>
                                     <td>" . ($row['tipo_usuario'] == 1 ? 'Admin' : 'Comum') . "</td>
-                                    <td><a href='delete.php?type=user&id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Tem certeza que deseja excluir este usuário?\");'>Excluir</a>
-</td>
-
+                                    <td><a href='delete.php?type=driver&id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Tem certeza que deseja excluir este motorista?\");'>Excluir</a></td>
                                   </tr>";
                         }
                     } else {

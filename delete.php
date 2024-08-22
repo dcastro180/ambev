@@ -13,20 +13,31 @@ if (isset($_GET['type']) && isset($_GET['id'])) {
     $type = $_GET['type'];
     $id = intval($_GET['id']);
     
-    if ($type == 'user') {
-        $sql = "DELETE FROM usuarios WHERE id = $id";
-    } elseif ($type == 'driver') {
-        $sql = "DELETE FROM motoristas WHERE id = $id";
-    } else {
-        echo "<script>alert('Tipo inválido.');</script>";
-        echo "<script>location.href='administradores.php';</script>";
-        exit;
-    }
+    // Verifica se o ID é válido
+    if ($id > 0) {
+        if ($type == 'user') {
+            $sql = $conn->prepare("DELETE FROM usuarios WHERE id = ?");
+        } elseif ($type == 'driver') {
+            $sql = $conn->prepare("DELETE FROM motoristas WHERE id = ?");
+        } else {
+            echo "<script>alert('Tipo inválido.');</script>";
+            echo "<script>location.href='administradores.php';</script>";
+            exit;
+        }
 
-    if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Registro excluído com sucesso.');</script>";
+        // Executa a consulta somente se foi preparada corretamente
+        if ($sql) {
+            $sql->bind_param("i", $id);
+            if ($sql->execute()) {
+                echo "<script>alert('Registro excluído com sucesso.');</script>";
+            } else {
+                echo "<script>alert('Erro ao excluir registro: " . $conn->error . "');</script>";
+            }
+        } else {
+            echo "<script>alert('Erro na preparação da consulta.');</script>";
+        }
     } else {
-        echo "<script>alert('Erro ao excluir registro: " . $conn->error . "');</script>";
+        echo "<script>alert('ID inválido.');</script>";
     }
 
     echo "<script>location.href='administradores.php';</script>";
@@ -36,4 +47,3 @@ if (isset($_GET['type']) && isset($_GET['id'])) {
 }
 
 $conn->close();
-?>
